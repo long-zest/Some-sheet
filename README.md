@@ -794,4 +794,38 @@ console.log(isPowerOfFour(n1)) //true (16 = 2^4)
 
 </details>
 
+<details>
+<summary>
+
+### Dub thingy
+  
+</summary>
+
+```javascript
+const eliminateDuplicates = (arr) => {
+        var i,
+            len = arr.length,
+            out = [],
+            obj = {};
+      
+        for (i = 0; i < len; i++) {
+          obj[arr[i]] = 0;
+        }
+        for (i in obj) {
+            out.push(i);
+        }
+        console.log(out)
+    }
+
+===================================THIS IS FOR OBJECT
+
+eliminateDuplicatesObject 
+        
+const uniqueObjects = [...new Map(arr.map(item => [item.vid, item])).values()] //it will leave the lasted dub and remove previous one in the array
+
+console.log(uniqueObjects)
+  
+```
+</details>
+
 
