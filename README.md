@@ -149,6 +149,125 @@ var mergeTwoLists = function(list1, list2) {
 <details>
 <summary>
 
+  #### 83. Remove Duplicates from Sorted List
+
+</summary>
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function (head) {
+    // Special case...
+    if (head == null || head.next == null)
+        return head;
+    // Initialize a pointer curr with the address of head node...
+    let curr = head;
+    // Traverse all element through a while loop if curr node and the next node of curr node are present...
+    while (curr != null && curr.next != null) {
+        // If the value of curr is equal to the value of prev...
+        // It means the value is present in the linked list...
+        if (curr.val == curr.next.val) {
+            // Hence we do not need to include curr again in the linked list...
+            // So we increment the value of curr...
+            curr.next = curr.next.next;
+        }
+        // Otherwise, we increment the curr pointer...
+        else {
+            curr = curr.next;
+        }
+    }
+    return head;        // Return the sorted linked list without any duplicate element...
+};
+```
+</details>
+
+<details>
+<summary>
+
+  #### 2618. Check if Object Instance of Class
+
+</summary>
+
+```
+Example 1:
+
+Input: func = () => checkIfInstanceOf(new Date(), Date)
+Output: true
+Explanation: The object returned by the Date constructor is, by definition, an instance of Date.
+
+Example 2:
+
+Input: func = () => { class Animal {}; class Dog extends Animal {}; return checkIfInstanceOf(new Dog(), Animal); }
+Output: true
+Explanation:
+class Animal {};
+class Dog extends Animal {};
+checkIfInstanceOf(new Dog(), Animal); // true
+
+Dog is a subclass of Animal. Therefore, a Dog object is an instance of both Dog and Animal.
+
+Example 3:
+
+Input: func = () => checkIfInstanceOf(Date, Date)
+Output: false
+Explanation: A date constructor cannot logically be an instance of itself.
+
+Example 4:
+
+Input: func = () => checkIfInstanceOf(5, Number)
+Output: true
+Explanation: 5 is a Number. Note that the "instanceof" keyword would return false. However, it is still considered an instance of Number because it accesses the Number methods. For example "toFixed()".
+```
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function (head) {
+    // Special case...
+    if (head == null || head.next == null)
+        return head;
+    // Initialize a pointer curr with the address of head node...
+    let curr = head;
+    // Traverse all element through a while loop if curr node and the next node of curr node are present...
+    while (curr != null && curr.next != null) {
+        // If the value of curr is equal to the value of prev...
+        // It means the value is present in the linked list...
+        if (curr.val == curr.next.val) {
+            // Hence we do not need to include curr again in the linked list...
+            // So we increment the value of curr...
+            curr.next = curr.next.next;
+        }
+        // Otherwise, we increment the curr pointer...
+        else {
+            curr = curr.next;
+        }
+    }
+    return head;        // Return the sorted linked list without any duplicate element...
+};
+```
+</details>
+
+<details>
+<summary>
+
 #### 2620. Counter
   
 </summary>
@@ -170,6 +289,116 @@ var createCounter = function(n) {
  * counter() // 10
  * counter() // 11
  * counter() // 12
+ */
+```
+
+  
+</details>
+
+<details>
+<summary>
+
+#### 2621. Sleep
+  
+</summary>
+
+```
+// Example 1:
+
+Input: millis = 100
+Output: 100
+Explanation: It should return a promise that resolves after 100ms.
+let t = Date.now();
+sleep(100).then(() => {
+  console.log(Date.now() - t); // 100
+});
+
+// Example 2:
+
+Input: millis = 200
+Output: 200
+Explanation: It should return a promise that resolves after 200ms.
+```
+
+```javascript
+/**
+ * @param {number} millis
+ * @return {Promise}
+ */
+async function sleep(millis) {
+    await new Promise(resolve => setTimeout(resolve, millis));
+}
+
+/** 
+ * let t = Date.now()
+ * sleep(100).then(() => console.log(Date.now() - t)) // 100
+*/
+```
+
+  
+</details>
+
+<details>
+<summary>
+
+#### 2624. Snail Traversal
+  
+</summary>
+
+```
+Example 1:
+
+Input: 
+nums = [19, 10, 3, 7, 9, 8, 5, 2, 1, 17, 16, 14, 12, 18, 6, 13, 11, 20, 4, 15]
+rowsCount = 5
+colsCount = 4
+Output: 
+[
+ [19,17,16,15],
+ [10,1,14,4],
+ [3,2,12,20],
+ [7,5,18,11],
+ [9,8,6,13]
+]
+
+Example 2:
+
+Input: 
+nums = [1,2,3,4]
+rowsCount = 1
+colsCount = 4
+Output: [[1, 2, 3, 4]]
+
+Example 3:
+
+Input: 
+nums = [1,3]
+rowsCount = 2
+colsCount = 2
+Output: []
+Explanation: 2 multiplied by 2 is 4, and the original array [1,3] has a length of 2; therefore, the input is invalid.
+```
+
+```javascript
+/**
+ * @param {number} rowsCount
+ * @param {number} colsCount
+ * @return {Array<Array<number>>}
+ */
+Array.prototype.snail = function(numRows, numCols) {
+  if (numRows * numCols !== this.length) return [];
+  let result = Array(numRows).fill().map(() => []);
+  for (let row = 0; row < numCols; row++) {
+    for (let col = 0; col < numRows; col++) {
+      result[(row & 1) ? numRows - col - 1 : col].push(this[row * numRows + col]);
+    }
+  }
+  return result;
+}
+
+/**
+ * const arr = [1,2,3,4];
+ * arr.snail(1,4); // [[1,2,3,4]]
  */
 ```
 
@@ -286,6 +515,68 @@ Array.prototype.groupBy = function(fn) {
 <details>
 <summary>
 
+#### 2634. Filter Elements from Array
+  
+</summary>
+
+```javascript
+/**
+ * @param {number[]} arr
+ * @param {Function} fn
+ * @return {number[]}
+ */
+var filter = function(arr, fn) {
+    var filteredArr = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (fn(arr[i], i)) {
+            filteredArr.push(arr[i]);
+        }
+    }
+    return filteredArr;
+};
+```
+
+  
+</details>
+
+<details>
+<summary>
+
+#### 2637. Promise Time Limit
+  
+</summary>
+
+```javascript
+/**
+ * @param {Function} fn
+ * @param {number} t
+ * @return {Function}
+ */
+var timeLimit = function(fn, t) {
+    return async function(...args) {
+        const originalFnPromise = fn(...args);
+
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => {
+                reject('Time Limit Exceeded')
+            }, t);
+        })
+
+        return Promise.race([originalFnPromise, timeoutPromise]);
+    }
+};
+
+/**
+ * const limited = timeLimit((t) => new Promise(res => setTimeout(res, t)), 100);
+ * limited(150).catch(console.log) // "Time Limit Exceeded" at t=100ms
+ */
+```
+  
+</details>
+
+<details>
+<summary>
+
 #### 2665. Counter II
   
 </summary>
@@ -320,8 +611,122 @@ var createCounter = function (init) {
  * counter.decrement(); // 4
 */
 ```
+</details>
 
+<details>
+<summary>
+
+#### 2722. Join Two Arrays by ID
   
+</summary>
+
+```
+Example 1:
+
+Input: 
+arr1 = [
+    {"id": 1, "x": 1},
+    {"id": 2, "x": 9}
+], 
+arr2 = [
+    {"id": 3, "x": 5}
+]
+Output: 
+[
+    {"id": 1, "x": 1},
+    {"id": 2, "x": 9},
+    {"id": 3, "x": 5}
+]
+Explanation: There are no duplicate ids so arr1 is simply concatenated with arr2.
+
+Example 2:
+
+Input: 
+arr1 = [
+    {"id": 1, "x": 2, "y": 3},
+    {"id": 2, "x": 3, "y": 6}
+], 
+arr2 = [
+    {"id": 2, "x": 10, "y": 20},
+    {"id": 3, "x": 0, "y": 0}
+]
+Output: 
+[
+    {"id": 1, "x": 2, "y": 3},
+    {"id": 2, "x": 10, "y": 20},
+    {"id": 3, "x": 0, "y": 0}
+]
+Explanation: The two objects with id=1 and id=3 are included in the result array without modifiction. The two objects with id=2 are merged together. The keys from arr2 override the values in arr1.
+
+Example 3:
+
+Input: 
+arr1 = [
+    {"id": 1, "b": {"b": 94},"v": [4, 3], "y": 48}
+]
+arr2 = [
+    {"id": 1, "b": {"c": 84}, "v": [1, 3]}
+]
+Output: [
+    {"id": 1, "b": {"c": 84}, "v": [1, 3], "y": 48}
+]
+Explanation: The two objects with id=1 are merged together. For the keys "b" and "v" the values from arr2 are used. Since the key "y" only exists in arr1, that value is taken form arr1.
+ 
+```
+
+```javascript
+/**
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @return {Array}
+ */
+var join = function(arr1, arr2) {
+    const result = {};
+
+    // 1. initialization
+    arr1.forEach(item => {
+        result[item.id] = item;
+    });
+    // 2. joining
+    arr2.forEach(item => {
+        if (result[item.id]) {
+            Object.keys(item).forEach(key => {
+                result[item.id][key] = item[key];    
+            });
+        } else {
+            result[item.id] = item;
+        }
+    });
+    console.log(result)
+    return Object.values(result);
+};
+```
+</details>
+
+<details>
+<summary>
+
+#### Spotify coding interview - power of 4
+  
+</summary>
+
+```javascript
+/**
+ * @param {number} n
+ * @return boolean
+ */
+
+const isPowerOfFour = function(n) {
+  if(n === 1) return true;
+  if(n <= 0) return false;
+  if(n % 4 !== 0) return false;
+
+  return isPowerOfFour(n/4);
+}
+
+const n1 = 16
+console.log(isPowerOfFour(n1)) //true (16 = 2^4)
+```
 </details>
 
 </details>
