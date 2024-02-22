@@ -828,4 +828,40 @@ console.log(uniqueObjects)
 ```
 </details>
 
+<details>
+<summary>
+
+### Unique Array
+  
+</summary>
+
+```javascript
+
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+
+// usage example:
+var a = ['a', 1, 'a', 2, '1'];
+var unique = a.every(onlyUnique);
+
+console.log(unique); // false
+
+// get all unique values in arr
+
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+
+// usage example:
+var a = ['a', 1, 'a', 2, '1'];
+var unique = a.filter(onlyUnique);
+
+console.log(unique); // ['a', 1, 2, '1']
+  
+```
+</details>
+
+
+
 
